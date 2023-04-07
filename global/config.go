@@ -1,5 +1,12 @@
 package global
 
-import "gorm.io/gorm"
+import (
+	"bookManage/config"
+	"go.uber.org/zap"
+	"gorm.io/gorm"
+)
 
 var DB *gorm.DB
+var ZapLog *zap.Logger
+
+var Config config.ConfigEnv

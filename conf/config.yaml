@@ -1,6 +1,0 @@
-mysql:
-  host: "11.0.1.70"
-  user: "root"
-  password: "123456"
-  port: 3306
-  dbname: "bookManger"
