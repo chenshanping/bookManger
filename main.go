@@ -1,8 +1,6 @@
 package main
 
-import (
-	"bookManage/core"
-)
+import "bookManage/core"
 
 func main() {
 	//配置文件初始化
