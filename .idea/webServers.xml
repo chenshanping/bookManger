@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="528e400a-1906-4702-b24b-0c67a3fe15b1" name="11.0.1.70">
+        <fileTransfer rootFolder="/data/bookManage" accessType="SFTP" host="11.0.1.70" port="22" sshConfigId="e2ccb33b-dcfe-45e8-87a4-2d393f1adb1b" sshConfig="root@11.0.1.70:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
