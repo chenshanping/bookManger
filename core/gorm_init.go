@@ -1,8 +1,8 @@
 package core
 
 import (
+	"bookManage/dao"
 	"bookManage/global"
-	"bookManage/models"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"gorm.io/driver/mysql"
@@ -43,9 +43,9 @@ func GormInit() {
 	newLogger := logger.New(
 		log.New(os.Stdout, "\r\n", log.LstdFlags), // io writer
 		logger.Config{
-			SlowThreshold: time.Second,  // 慢 SQL 阈值
-			LogLevel:      logger.Error, // Log level
-			Colorful:      true,         // 彩色打印
+			SlowThreshold: time.Second, // 慢 SQL 阈值
+			LogLevel:      logger.Info, // Log level
+			Colorful:      true,        // 彩色打印
 		},
 	)
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
@@ -54,11 +54,9 @@ func GormInit() {
 	if err != nil {
 		log.Fatalln(err)
 	} else {
-		fmt.Println("gorm初始化成功")
+		log.Println("gorm初始化成功")
 	}
 	global.DB = db
-	if err := global.DB.AutoMigrate(models.User{}, models.Book{}); err != nil {
-		fmt.Printf("数据库创建失败:", err)
-	}
+	dao.MysqlAuto()
 
 }

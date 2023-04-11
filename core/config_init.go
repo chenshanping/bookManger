@@ -4,6 +4,7 @@ import (
 	"bookManage/global"
 	"fmt"
 	"github.com/spf13/viper"
+	"log"
 )
 
 func ConfigInit() {
@@ -21,7 +22,7 @@ func ConfigInit() {
 	LoadMysqlConfig()
 	LoadMioinConfig()
 	LoadZapConfig()
-	fmt.Println("配置文件初始化成功")
+	log.Println("配置文件初始化成功")
 }
 
 func LoadMysqlConfig() {

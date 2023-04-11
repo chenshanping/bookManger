@@ -2,6 +2,7 @@ package router
 
 import (
 	"bookManage/controller"
+	"bookManage/middleware"
 	"github.com/gin-gonic/gin"
 )
 
@@ -11,14 +12,20 @@ func LoadApiRouter(r *gin.Engine) {
 	r.POST("/login", controller.LoginHandler)
 
 	v1 := r.Group("/user")
+
 	{
 		v1.GET("/list", controller.GetUserList)
-		v1.GET("/delete", controller.DeleteUser)
+		v1.DELETE("/delete", controller.DeleteUser)
 
 	}
-	group := r.Group("/v1")
+	v2 := r.Group("/book")
+	v2.Use(middleware.AuthMiddleware())
 	{
-		group.GET("/line", controller.QQ)
+		v2.GET("/list", controller.BookList)
+		v2.POST("/create", controller.CreateBook)
+		v2.DELETE("/delete", controller.DeleteBook)
+		v2.POST("/updata", controller.UpdateBook)
+		v2.GET("/bookdetail", controller.GetBookDetail)
 	}
 
 }

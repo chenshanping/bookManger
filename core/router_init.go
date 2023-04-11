@@ -2,26 +2,27 @@ package core
 
 import (
 	"bookManage/router"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
+	"log"
 	"net/http"
 )
 
 func RouterInit() *gin.Engine {
 	// 1. 初始化
-	//gin.SetMode("release")
+	gin.SetMode("release")
 	r := gin.Default()
 	//r := gin.New()
 	//r.Use(GinLogger(), GinRecovery(true))
 	r.Use(Cors())
+
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	//r.Use(gin.LoggerWithFormatter(LogFormat))
 	router.TestApi(r)
 	router.LoadApiRouter(r)
-	fmt.Println("路由初始化成功")
+	log.Println("路由初始化成功")
 	return r
 }
 
