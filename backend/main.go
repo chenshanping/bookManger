@@ -1,9 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"bookManage/core"
+)
 
 func main() {
 
-	fmt.Printf("111")
+	core.InitConfig()
 
 }
