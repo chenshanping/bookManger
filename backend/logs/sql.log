@@ -1,0 +1,75 @@
+
+2023/04/29 22:20:25 E:/GO-MOULUE/project/book-manger/backend/initialize/db.go:98
+[0.512ms] [rows:-] SELECT DATABASE()
+
+2023/04/29 22:20:25 E:/GO-MOULUE/project/book-manger/backend/initialize/db.go:98
+[1.012ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'bookManger%' ORDER BY SCHEMA_NAME='bookManger' DESC,SCHEMA_NAME limit 1
+
+2023/04/29 22:20:25 E:/GO-MOULUE/project/book-manger/backend/initialize/db.go:98
+[0.508ms] [rows:-] SELECT count(*) FROM information_schema.tables WHERE table_schema = 'bookManger' AND table_name = 'user' AND table_type = 'BASE TABLE'
+
+2023/04/29 22:20:25 E:/GO-MOULUE/project/book-manger/backend/initialize/db.go:98
+[0.000ms] [rows:-] SELECT DATABASE()
+
+2023/04/29 22:20:25 E:/GO-MOULUE/project/book-manger/backend/initialize/db.go:98
+[0.737ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'bookManger%' ORDER BY SCHEMA_NAME='bookManger' DESC,SCHEMA_NAME limit 1
+
+2023/04/29 22:20:25 E:/GO-MOULUE/project/book-manger/backend/initialize/db.go:98
+[0.000ms] [rows:-] SELECT * FROM `user` LIMIT 1
+
+2023/04/29 22:20:25 E:/GO-MOULUE/project/book-manger/backend/initialize/db.go:98
+[0.508ms] [rows:-] SELECT column_name, column_default, is_nullable = 'YES', data_type, character_maximum_length, column_type, column_key, extra, column_comment, numeric_precision, numeric_scale , datetime_precision FROM information_schema.columns WHERE table_schema = 'bookManger' AND table_name = 'user' ORDER BY ORDINAL_POSITION
+
+
+2023/04/29 22:20:35 E:/GO-MOULUE/project/book-manger/backend/service/user.go:9
+[0.876ms] [rows:2] SELECT * FROM `user`
+2023/04/29 22:32:17 E:/GO-MOULUE/project/book-manger/backend/service/user.go:9
+[1.068ms] [rows:2] SELECT * FROM `user`
+
+2023/04/29 22:34:45 E:/GO-MOULUE/project/book-manger/backend/service/user.go:9
+[1.338ms] [rows:2] SELECT * FROM `user`
+
+2023/05/01 17:45:54 E:/GO-MOULUE/project/book-manger/backend/initialize/db.go:99
+[0.507ms] [rows:-] SELECT DATABASE()
+
+2023/05/01 17:45:54 E:/GO-MOULUE/project/book-manger/backend/initialize/db.go:99
+[0.514ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'bookManger%' ORDER BY SCHEMA_NAME='bookManger' DESC,SCHEMA_NAME limit 1
+
+2023/05/01 17:45:54 E:/GO-MOULUE/project/book-manger/backend/initialize/db.go:99
+[0.517ms] [rows:-] SELECT count(*) FROM information_schema.tables WHERE table_schema = 'bookManger' AND table_name = 'user' AND table_type = 'BASE TABLE'
+
+2023/05/01 17:45:54 E:/GO-MOULUE/project/book-manger/backend/initialize/db.go:99
+[0.000ms] [rows:-] SELECT DATABASE()
+
+2023/05/01 17:45:54 E:/GO-MOULUE/project/book-manger/backend/initialize/db.go:99
+[0.725ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'bookManger%' ORDER BY SCHEMA_NAME='bookManger' DESC,SCHEMA_NAME limit 1
+
+2023/05/01 17:45:54 E:/GO-MOULUE/project/book-manger/backend/initialize/db.go:99
+[0.045ms] [rows:-] SELECT * FROM `user` LIMIT 1
+
+2023/05/01 17:45:54 E:/GO-MOULUE/project/book-manger/backend/initialize/db.go:99
+[0.760ms] [rows:-] SELECT column_name, column_default, is_nullable = 'YES', data_type, character_maximum_length, column_type, column_key, extra, column_comment, numeric_precision, numeric_scale , datetime_precision FROM information_schema.columns WHERE table_schema = 'bookManger' AND table_name = 'user' ORDER BY ORDINAL_POSITION
+
+2023/05/01 17:45:54 E:/GO-MOULUE/project/book-manger/backend/initialize/db.go:99
+[0.514ms] [rows:-] SELECT DATABASE()
+
+2023/05/01 17:45:54 E:/GO-MOULUE/project/book-manger/backend/initialize/db.go:99
+[1.030ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'bookManger%' ORDER BY SCHEMA_NAME='bookManger' DESC,SCHEMA_NAME limit 1
+
+2023/05/01 17:45:54 E:/GO-MOULUE/project/book-manger/backend/initialize/db.go:99
+[0.615ms] [rows:-] SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'bookManger' AND table_name = 'user' AND index_name = 'idx_user_deleted_at'
+
+2023/05/01 17:46:06 E:/GO-MOULUE/project/book-manger/backend/service/user.go:16
+[0.912ms] [rows:0] SELECT * FROM `user` WHERE `user`.`deleted_at` IS NULL
+
+2023/05/01 17:46:27 E:/GO-MOULUE/project/book-manger/backend/service/user.go:16
+[0.645ms] [rows:0] SELECT * FROM `user` WHERE `user`.`deleted_at` IS NULL
+
+2023/05/01 17:46:40 E:/GO-MOULUE/project/book-manger/backend/service/user.go:40
+[0.995ms] [rows:0] SELECT * FROM `user` WHERE id='4' AND `user`.`deleted_at` IS NULL
+
+2023/05/01 17:47:02 E:/GO-MOULUE/project/book-manger/backend/service/user.go:30
+[2.230ms] [rows:0] SELECT * FROM `user` WHERE username='csp' AND `user`.`deleted_at` IS NULL ORDER BY `user`.`id` LIMIT 1
+
+2023/05/01 17:47:02 E:/GO-MOULUE/project/book-manger/backend/service/user.go:22 Error 1146 (42S02): Table 'bookManger.user_register' doesn't exist
+[0.953ms] [rows:0] INSERT INTO `user_register` (`username`,`password`,`sex`,`age`,`phone`) VALUES ('csp','e10adc3949ba59abbe56e057f20f883e','男','24','18824682674')

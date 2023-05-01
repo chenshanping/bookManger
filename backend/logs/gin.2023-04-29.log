@@ -1,0 +1,4 @@
+{"level":"INFO","time":"2023/04/29 - 19:24:19.114","msg":"Info记录","name":"张三"}
+{"level":"INFO","time":"2023/04/29 - 19:26:15.788","msg":"Info记录","name":"张三"}
+{"level":"INFO","time":"2023/04/29 - 19:26:37.362","msg":"日志写入测试: hellohellohellohellohellohello"}
+{"level":"INFO","time":"2023/04/29 - 19:29:03.945","msg":"info"}

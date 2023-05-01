@@ -1,11 +1,16 @@
 package main
 
 import (
-	"bookManage/core"
+	"bookManage/initialize"
 )
 
 func main() {
+	initialize.InitConfig()
+	initialize.InitDB()
 
-	core.InitConfig()
+	initialize.InitLogger()
+	initialize.InitRedis()
+
+	initialize.InitGin()
 
 }
