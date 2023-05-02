@@ -7,3 +7,5 @@ RUN rm -f /app/logs/* &&  \
     go build -o server main.go
 EXPOSE 8080
 ENTRYPOINT ["/app/server"]
+
+
