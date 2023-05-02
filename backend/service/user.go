@@ -3,6 +3,7 @@ package service
 import (
 	"bookManage/global"
 	"bookManage/model"
+	"bookManage/schemas/resp"
 )
 
 var UserService = userService{}
@@ -11,7 +12,7 @@ type userService struct {
 }
 
 // GetAllUser 获取用户列表
-func (usrv userService) GetAllUser(pageSize int, offsetval int) (userList []*model.User, total int64) {
+func (usrv userService) GetAllUser(pageSize int, offsetval int) (userList []*resp.User, total int64) {
 	global.DB.Model(userList).Count(&total).Limit(pageSize).Offset(offsetval).Find(&userList)
 	return
 }

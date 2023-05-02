@@ -1,30 +1,89 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
-</template>
+    <div class="table-box">
+        <div class="title">
+            <h2>简单的CRUDdemo</h2>
+        </div>
+        <div class="query-box">
+            <el-input v-model="queryInput" placeholder="请输入姓名搜索" />
+            <el-button type="primary">增加</el-button>
+        </div>
+        <!--table-->
+        <el-table :data="tableData" style="width: 100%">
+            <el-table-column fixed prop="date" label="Date" width="150" />
+            <el-table-column prop="name" label="Name" width="120" />
+            <el-table-column prop="state" label="State" width="120" />
+            <el-table-column prop="city" label="City" width="120" />
+            <el-table-column prop="address" label="Address" width="600" />
+            <el-table-column prop="zip" label="Zip" width="120" />
+            <el-table-column fixed="right" label="Operations" width="120">
+                <template #default>
+                    <el-button link type="primary" size="small" @click="handleRowClick"
+                    >Detail</el-button>
+                    <el-button link type="primary" size="small">Edit</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
 
+    </div>
+</template>
+<script setup>
+     import {ref} from "vue";
+     /*数据*/
+     let queryInput=ref("")
+     let tableData=ref([
+         {
+         date: '2016-05-03',
+         name: 'Tom',
+         state: 'California',
+         city: 'Los Angeles',
+         address: 'No. 189, Grove St, Los Angeles',
+         zip: 'CA 90036',
+         tag: 'Home',
+     },
+         {
+             date: '2016-05-02',
+             name: 'Tom',
+             state: 'California',
+             city: 'Los Angeles',
+             address: 'No. 189, Grove St, Los Angeles',
+             zip: 'CA 90036',
+             tag: 'Office',
+         },
+         {
+             date: '2016-05-04',
+             name: 'Tom',
+             state: 'California',
+             city: 'Los Angeles',
+             address: 'No. 189, Grove St, Los Angeles',
+             zip: 'CA 90036',
+             tag: 'Home',
+         },
+         {
+             date: '2016-05-01',
+             name: 'Tom',
+             state: 'California',
+             city: 'Los Angeles',
+             address: 'No. 189, Grove St, Los Angeles',
+             zip: 'CA 90036',
+             tag: 'Office',
+         },
+     ])
+
+
+     /*方法*/
+    let handleRowClick=()=>{
+        console.log('click')
+    }
+</script>
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.table-box{
+     width: 800px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+
+
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
+
 </style>

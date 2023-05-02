@@ -1,9 +1,9 @@
-FROM golang:1.19 as builder
+FROM golang as builder
 LABEL authors="csp"
 WORKDIR /app
-COPY backend/main.go app/
-COPY backend/go.mod app/
-COPY backend/go.sum app/
 ENV GOPROXY https://goproxy.cn
-RUN go build -o bookManger main.go
-ENTRYPOINT ["/app/bookManger"]
+ADD backend /app
+RUN rm -f /app/logs/* &&  \
+    go build -o server main.go
+EXPOSE 8080
+ENTRYPOINT ["/app/server"]

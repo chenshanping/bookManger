@@ -1,0 +1,10 @@
+version: '3'
+services:
+  bookManger-server:
+    image: "bookmanger-server"
+    container_name: bookManger-server
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./logs:/app/logs
+      - /etc/localtime:/etc/localtime

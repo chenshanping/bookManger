@@ -72,5 +72,5 @@ if __name__ == '__main__':
             "phone":phonelist[i],
         }
         # print(data)
-        a=requests.post('http://127.0.0.1:8080/register', headers=headers, data=json.dumps(data))
+        a=requests.post('http://11.0.1.70:8080/register', headers=headers, data=json.dumps(data))
         # print(a.text)

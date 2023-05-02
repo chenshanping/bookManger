@@ -26,9 +26,9 @@ redis:
   prefix: "book_"
   dialTimeout: 5s #redis连接超时时间.默认5s
 system:
-  host: "localhost"
+  host: ""
   port: "8080"
-  env: "debug"
+  env: "dev"
 log:
   path: ./logs # 日志文件目录
   filePrefix: gin # 日志文件前缀
