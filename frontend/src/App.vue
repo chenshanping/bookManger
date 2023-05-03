@@ -5,7 +5,11 @@
         </div>
         <div class="query-box">
             <el-input class="query-input" v-model="queryInput" placeholder="请输入姓名搜索" />
-            <el-button  text type="primary" @click="handleAdd">增加</el-button>
+            <div class="btn-list">
+                <el-button  text type="primary" @click="handleAdd">增加</el-button>
+                <el-button  text type="danger" @click="handleDelList" v-if="multipleSelection.length>0">删除</el-button>
+            </div>
+
         </div>
         <!--table-->
         <el-table
@@ -21,8 +25,8 @@
             <el-table-column prop="age" label="年龄" width="120" />
             <el-table-column prop="phone" label="手机号码" width="250" />
             <el-table-column fixed="right" label="操作" width="120">
-                <template #default>
-                    <el-button link type="primary" size="small" @click="handleRowClick"
+                <template #default="scope">
+                    <el-button link type="primary" size="small" @click="handleRowClickDel(scope.row)"
                     style="color: #ff1a44"
                     >
                         删除
@@ -105,13 +109,30 @@
      })
      let dialogType=$ref('add')
      /*方法*/
-    let handleRowClick=()=>{
-        console.log('click')
+     /*删除第一条*/
+    let handleRowClickDel=({id})=>{
+        let index=tableData.findIndex(item=>item.id===id)
+        tableData.splice(index,1)
+
     }
-     let handleSelectionChange = (val) => {
-         multipleSelection = val
-         console.log(val)
+     let handleDelList = ()=>{
+        multipleSelection.forEach(id=>{
+            handleRowClickDel({id})
+        })
+
      }
+     let handleSelectionChange = (val) => {
+
+         // multipleSelection = val
+         // console.log(val)
+         multipleSelection=[]
+         val.forEach(
+             item=>{
+                 multipleSelection.push(item.id)
+             }
+         )
+     }
+
      let handleAdd=()=>{
          dialogFormVisible=true
          tableForm={}
