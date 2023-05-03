@@ -31,7 +31,7 @@
                     >
                         删除
                     </el-button>
-                    <el-button link type="primary" size="small">
+                    <el-button link type="primary" size="small" @click="handleEdit(scope.row)">
                         编辑
                     </el-button>
                 </template>
@@ -109,18 +109,26 @@
      })
      let dialogType=$ref('add')
      /*方法*/
+     /*编辑*/
+     let handleEdit=(row)=>{
+         dialogFormVisible=true
+         dialogType='edit'
+         tableForm={...row}
+     }
      /*删除第一条*/
     let handleRowClickDel=({id})=>{
         let index=tableData.findIndex(item=>item.id===id)
         tableData.splice(index,1)
 
     }
+    /*删除多条*/
      let handleDelList = ()=>{
         multipleSelection.forEach(id=>{
             handleRowClickDel({id})
         })
 
      }
+     /*多选*/
      let handleSelectionChange = (val) => {
 
          // multipleSelection = val
@@ -132,19 +140,25 @@
              }
          )
      }
-
+    /*新增*/
      let handleAdd=()=>{
          dialogFormVisible=true
          tableForm={}
+         dialogType='add'
      }
      let dialogConfirm=()=>{
          dialogFormVisible=false
+         if( dialogType==='add'){
+             tableData.push({
+                 id: (tableData.length+1).toString(),
+                 ...tableForm
+             })
+         }else{
+             /*获取当前这条索引*/
+             let index=tableData.findIndex(item=>item.id===tableForm.id)
+             tableData[index]=tableForm
+         }
 
-         tableData.push({
-             id: (tableData.length+1).toString(),
-             ...tableForm
-         })
-         console.log(tableData)
      }
 
 </script>
