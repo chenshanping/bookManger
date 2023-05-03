@@ -8,5 +8,9 @@ services:
     volumes:
       - ./logs:/app/logs
       - /etc/localtime:/etc/localtime
-
+  bookManger-nginx:
+    container_name: bookManger-nginx
+    image: "bookmanger-nginx"
+    ports:
+      - "8082:8082"
 
