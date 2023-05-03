@@ -1,10 +1,10 @@
 <template>
     <div class="table-box">
         <div class="title">
-            <h2>简单的CRUDdemo</h2>
+            <h2>简单的 CRUD demo</h2>
         </div>
         <div class="query-box">
-            <el-input class="query-input" v-model="queryInput" placeholder="请输入姓名搜索" />
+            <el-input class="query-input" v-model="queryInput" placeholder="请输入姓名搜索" @input="handleQueryName"/>
             <div class="btn-list">
                 <el-button  text type="primary" @click="handleAdd">增加</el-button>
                 <el-button  text type="danger" @click="handleDelList" v-if="multipleSelection.length>0">删除</el-button>
@@ -98,6 +98,7 @@
              phone:"18824682674"
          },
      ])
+     let tableDataCopy=Object.assign(tableData)
      let multipleSelection=$ref([])
      let dialogFormVisible=$ref(false)
      let tableForm=$ref({
@@ -109,6 +110,16 @@
      })
      let dialogType=$ref('add')
      /*方法*/
+     /*搜索*/
+     let handleQueryName=(val)=>{
+         if(val.length>0){
+             tableData=tableData.filter(item=>(item.name).toLowerCase().match(val.toLowerCase()))
+         } else{
+             tableData=tableDataCopy
+         }
+
+
+     }
      /*编辑*/
      let handleEdit=(row)=>{
          dialogFormVisible=true
@@ -178,7 +189,7 @@
      margin-bottom: 20px;
  }
  .query-input{
-    width: 300px;
+    width: 200px;
  }
  .el-dialog{
      margin: 200px auto;
