@@ -1,2 +1,6 @@
 FROM registry.cn-shenzhen.aliyuncs.com/jxqwe/base:nginx
+MAINTAINER chenshanping
+WORKDIR /var/www/
+COPY frontend/dist /var/www/
+COPY nginx.conf /etc/nginx/conf.d
 EXPOSE 80 443

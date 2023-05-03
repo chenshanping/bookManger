@@ -1,5 +1,5 @@
 FROM golang as builder
-LABEL authors="csp"
+MAINTAINER chenshanping
 WORKDIR /app
 ENV GOPROXY https://goproxy.cn
 ADD backend /app
