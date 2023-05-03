@@ -1,0 +1,2 @@
+FROM registry.cn-shenzhen.aliyuncs.com/jxqwe/base:nginx
+EXPOSE 80 443
