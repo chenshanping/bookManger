@@ -55,7 +55,6 @@ func UpdateUser(c *gin.Context) {
 	id := c.Param("id")
 	if err := c.BindJSON(&user); err != nil {
 		resp.FailWithMsg(c, resp.ParamsValidError, err.Error())
-		//resp.Fail(c, resp.ParamsValidError)
 		return
 	}
 	exist := service.UserService.IDExist(id)

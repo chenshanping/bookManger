@@ -54,8 +54,8 @@ func (usrv userService) UpdateUser(id string, user model.User) {
 	global.DB.Where("id=?", id).Updates(&user)
 }
 
-func (usrv userService) UserDetail(name string) []model.User {
-	var user []model.User
+func (usrv userService) UserDetail(name string) []resp.User {
+	var user []resp.User
 	global.DB.Where("username=?", name).Find(&user)
 	return user
 
