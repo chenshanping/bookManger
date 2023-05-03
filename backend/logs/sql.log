@@ -139,3 +139,39 @@
 
 2023/05/02 12:04:27 E:/GO-MOULUE/project/book-manger/backend/service/user.go:54
 [1.164ms] [rows:1] UPDATE `book_user` SET `updated_at`='2023-05-02 12:04:27.24',`username`='rfvDRb',`password`='e10adc3949ba59abbe56e057f20f883e',`sex`='女',`age`=18,`phone`='35250036683' WHERE id='12' AND `book_user`.`deleted_at` IS NULL
+
+2023/05/03 11:31:15 E:/GO-MOULUE/project/book-manger/backend/initialize/db.go:100
+[0.509ms] [rows:-] SELECT DATABASE()
+
+2023/05/03 11:31:15 E:/GO-MOULUE/project/book-manger/backend/initialize/db.go:100
+[1.329ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'bookManger%' ORDER BY SCHEMA_NAME='bookManger' DESC,SCHEMA_NAME limit 1
+
+2023/05/03 11:31:15 E:/GO-MOULUE/project/book-manger/backend/initialize/db.go:100
+[0.593ms] [rows:-] SELECT count(*) FROM information_schema.tables WHERE table_schema = 'bookManger' AND table_name = 'book_user' AND table_type = 'BASE TABLE'
+
+2023/05/03 11:31:15 E:/GO-MOULUE/project/book-manger/backend/initialize/db.go:100
+[0.000ms] [rows:-] SELECT DATABASE()
+
+2023/05/03 11:31:15 E:/GO-MOULUE/project/book-manger/backend/initialize/db.go:100
+[0.506ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'bookManger%' ORDER BY SCHEMA_NAME='bookManger' DESC,SCHEMA_NAME limit 1
+
+2023/05/03 11:31:15 E:/GO-MOULUE/project/book-manger/backend/initialize/db.go:100
+[0.997ms] [rows:-] SELECT * FROM `book_user` LIMIT 1
+
+2023/05/03 11:31:15 E:/GO-MOULUE/project/book-manger/backend/initialize/db.go:100
+[1.000ms] [rows:-] SELECT column_name, column_default, is_nullable = 'YES', data_type, character_maximum_length, column_type, column_key, extra, column_comment, numeric_precision, numeric_scale , datetime_precision FROM information_schema.columns WHERE table_schema = 'bookManger' AND table_name = 'book_user' ORDER BY ORDINAL_POSITION
+
+2023/05/03 11:31:15 E:/GO-MOULUE/project/book-manger/backend/initialize/db.go:100
+[1.000ms] [rows:-] SELECT DATABASE()
+
+2023/05/03 11:31:15 E:/GO-MOULUE/project/book-manger/backend/initialize/db.go:100
+[0.000ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'bookManger%' ORDER BY SCHEMA_NAME='bookManger' DESC,SCHEMA_NAME limit 1
+
+2023/05/03 11:31:15 E:/GO-MOULUE/project/book-manger/backend/initialize/db.go:100
+[1.000ms] [rows:-] SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'bookManger' AND table_name = 'book_user' AND index_name = 'idx_book_user_deleted_at'
+
+2023/05/03 11:31:34 E:/GO-MOULUE/project/book-manger/backend/service/user.go:16
+[1.020ms] [rows:1] SELECT count(*) FROM `book_user`
+
+2023/05/03 11:31:34 E:/GO-MOULUE/project/book-manger/backend/service/user.go:16
+[0.523ms] [rows:11] SELECT * FROM `book_user` 

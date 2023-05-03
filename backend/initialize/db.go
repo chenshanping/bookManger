@@ -17,7 +17,9 @@ import (
 func setNewLogger(gConfig *gorm.Config) {
 	m := global.Config.Mysql
 	logPath := global.Config.Log.Path
-	file, _ := os.OpenFile(logPath+"/sql.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, os.ModePerm)
+	tStr := time.Now().Format("20060102")
+	sqlfile := fmt.Sprintf("/sql-%s.log", tStr)
+	file, _ := os.OpenFile(logPath+sqlfile, os.O_RDWR|os.O_CREATE|os.O_APPEND, os.ModePerm)
 	// 日志级别映射 error、info、warn
 
 	logLevelMap := map[string]logger.LogLevel{
