@@ -9,7 +9,7 @@ func main() {
 	initialize.InitDB()
 
 	initialize.InitLogger()
-	initialize.InitRedis()
+	//initialize.InitRedis()
 
 	initialize.InitGin()
 
