@@ -3,6 +3,7 @@ package service
 import (
 	"bookManage/global"
 	"bookManage/model"
+	"bookManage/schemas/req"
 )
 
 var UserService = userService{}
@@ -17,7 +18,13 @@ func (usrv userService) GetAllUser(pageSize int, offsetval int) (userList []*mod
 }
 
 // CreateUser 添加用户
-func (usrv userService) CreateUser(user *model.User) (err error) {
+func (usrv userService) CreateUser(user *req.UserCreate) (err error) {
+	if err := global.DB.Create(user).Error; err != nil {
+		return err
+	}
+	return
+}
+func (usrv userService) CreateUser1(user *model.User) (err error) {
 	if err := global.DB.Create(user).Error; err != nil {
 		return err
 	}

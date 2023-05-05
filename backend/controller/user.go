@@ -2,6 +2,7 @@ package controller
 
 import (
 	"bookManage/model"
+	"bookManage/schemas/req"
 	"bookManage/schemas/resp"
 	"bookManage/service"
 	"bookManage/util"
@@ -77,4 +78,21 @@ func GetUserDatail(c *gin.Context) {
 		resp.OkWithMsgData(c, "查询成功", detail)
 	}
 
+}
+
+func UserCreate(c *gin.Context) {
+	var user req.UserCreate
+	if err := c.BindJSON(&user); err != nil {
+		resp.FailWithMsg(c, resp.ParamsValidError, err.Error())
+		return
+	}
+	if service.UserService.GetUserId(user.Username) != 0 {
+		resp.Fail(c, resp.RegisterError)
+		return
+	}
+	if err := service.UserService.CreateUser(&user); err != nil {
+		resp.FailWithMsg(c, resp.Failed, err.Error())
+	} else {
+		resp.OkWithMsg(c, "用户创建成功")
+	}
 }

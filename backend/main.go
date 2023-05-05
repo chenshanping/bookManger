@@ -1,6 +1,8 @@
 package main
 
-import "bookManage/initialize"
+import (
+	"bookManage/initialize"
+)
 
 func main() {
 	initialize.InitConfig()

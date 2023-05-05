@@ -28,7 +28,7 @@ redis:
 system:
   host: ""
   port: "8080"
-  env: "dev"
+  env: "debug"
 log:
   path: ./logs # 日志文件目录
   filePrefix: gin # 日志文件前缀

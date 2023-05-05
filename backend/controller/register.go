@@ -19,7 +19,7 @@ func Register(c *gin.Context) {
 		return
 	}
 	user.Password = util.ToolsUtil.MakeMd5(user.Password)
-	if err := service.UserService.CreateUser(&user); err != nil {
+	if err := service.UserService.CreateUser1(&user); err != nil {
 		resp.FailWithMsg(c, resp.Failed, err.Error())
 	} else {
 		resp.OkWithMsg(c, "注册成功")
