@@ -4,7 +4,7 @@
             <h2>简单的 CRUD demo</h2>
         </div>
         <div class="query-box">
-            <el-input class="query-input" v-model="queryInput" placeholder="请输入姓名搜索" @input="handleQueryName"/>
+            <el-input class="query-input" v-model="queryInput" placeholder="请输入姓名搜索" @change="handleQueryName"/>
             <div class="btn-list">
                 <el-button  text type="primary" @click="handleAdd">增加</el-button>
                 <el-button  text type="danger" @click="handleDelList" v-if="multipleSelection.length>0">删除</el-button>
@@ -36,7 +36,17 @@
                     </el-button>
                 </template>
             </el-table-column>
+
+
         </el-table>
+        <el-pagination
+            background
+            layout="prev, pager, next"
+            :total="total"
+            style="display: flex;justify-content: center;margin-top: 10px"
+            v-model:current-page="curPage"
+            @current-change="handleChangePage"
+        />
        <!-- dialog       -->
         <el-dialog v-model="dialogFormVisible" :title="dialogType ==='add' ? '新增':'编辑'" >
 <!--            :label-position="labelPosition" :label-width="300"-->
@@ -82,25 +92,36 @@
          phone:"18824682674"
      })
      let dialogType=$ref('add')
-     /*方法*/
+     let total=$ref(10)
+     let curPage=$ref(1)
 
+     /*方法*/
+     /*请求table数据*/
      const getTableData= async (cur=1)=>{
          let res=await request.get('/list',{
-             pageNum: -1,
-             pageSize: -1,
+             pageNum: cur,
+             pageSize: 10,
          })
          tableData=res.list
          tableDataCopy=tableData
-         console.log(res.list)
+         total=res.total
+         curPage=res.pageNum
      }
      getTableData()
 
+     /*请求分页*/
+     const handleChangePage=(val)=>{
+         getTableData(curPage)
+     }
      /*搜索*/
-     let handleQueryName=(val)=>{
+     let handleQueryName= async (val)=>{
+
          if(val.length>0){
-             tableData=tableData.filter(item=>(item.username).toLowerCase().match(val.toLowerCase()))
+             tableData=await request.get(`/list/${val}`)
+             // tableData=tableData.filter(item=>(item.username).toLowerCase().match(val.toLowerCase()))
          } else{
-             tableData=tableDataCopy
+             getTableData(curPage)
+             // tableData=tableDataCopy
          }
 
 
@@ -113,9 +134,10 @@
      }
      /*删除第一条*/
     let handleRowClickDel= async ({ID})=>{
-        let index=tableData.findIndex(item=>item.ID===ID)
-        tableData.splice(index,1)
-        let res=await request.delete( `/delete/${ID}`)
+        console.log(ID)
+        await request.delete(`/delete/${ID}`,)
+        await getTableData(curPage)
+
 
     }
     /*删除多条*/
@@ -144,17 +166,27 @@
          tableForm={}
          dialogType='add'
      }
-     let dialogConfirm=()=>{
+     let dialogConfirm=async ()=>{
          dialogFormVisible=false
+         tableForm.age=tableForm.age-0
+         let index=tableForm.ID
          if( dialogType==='add'){
-             tableData.push({
-                 id: (tableData.length+1).toString(),
-                 ...tableForm
-             })
+             /*将 number 类型转为 int类型*/
+             let res=await request.post("/",{...tableForm})
+             // tableData.push({
+             //     id: (tableData.length+1).toString(),
+             //     ...tableForm
+             // })
+
+             await getTableData(curPage)
          }else{
              /*获取当前这条索引*/
-             let index=tableData.findIndex(item=>item.id===tableForm.id)
-             tableData[index]=tableForm
+             // let index=tableData.findIndex(item=>item.id===tableForm.id)
+
+             // tableData[index]=tableForm
+             // /*11.0.1.60:8081/user/update/26*/
+             await request.put(`/update/${index}`,{...tableForm})
+             await getTableData(curPage)
          }
 
      }
