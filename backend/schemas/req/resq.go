@@ -25,9 +25,10 @@ func (UserRegister) TableName() string {
 }
 
 type UserCreate struct {
+	gorm.Model
 	Username string `json:"username" binding:"required,min=2,max=20"` // 账号
 	Sex      string `json:"sex" binding:"required"`
-	Age      int    `json:"age" binding:"required"`
+	Age      uint   `json:"age" binding:"required"`
 	Phone    string `json:"phone" binding:"required,min=9,max=11"`
 }
 
