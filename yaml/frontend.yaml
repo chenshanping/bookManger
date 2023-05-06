@@ -6,7 +6,7 @@ metadata:
 data:
   nginx.conf: |
     server {
-    listen 8082;
+    listen 80;
     server_name  localhost;
     gzip on;
     gzip_min_length 100;

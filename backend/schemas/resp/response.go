@@ -4,6 +4,7 @@ import (
 	"bookManage/global"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
+	"net/http"
 )
 
 type RespType struct {
@@ -38,7 +39,7 @@ func Result(c *gin.Context, resp RespType, data interface{}) {
 	if data == nil {
 		data = resp.data
 	}
-	c.JSON(resp.code, Response{
+	c.JSON(http.StatusOK, Response{
 		Code: resp.code,
 		Msg:  resp.msg,
 		Data: data,
