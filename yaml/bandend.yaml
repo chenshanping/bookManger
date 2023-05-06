@@ -1,23 +1,59 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: Title
+  namespace: gotest
+  name: book-manage-server
   labels:
-    app: Title
+    app: book-manage-server
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: Title
+      app: book-manage-server
   template:
     metadata:
-      name: Title
+      name: book-manage-server
       labels:
-        app: Title
+        app: book-manage-server
     spec:
+      imagePullSecrets:
+        - name: docker-secret
       containers:
-        - name: Title
-          image: Image
+        - name: book-manage-server
+          image: registry.cn-shenzhen.aliyuncs.com/csptest/bookmanger-server:v5.6.2
           imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
       restartPolicy: Always
-      
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: book-manage-server
+spec:
+  selector:
+    app: book-manage-server
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: book-manage-server
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: bookserver.csp.cn
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: book-manage-server
+                port:
+                  number: 8080
