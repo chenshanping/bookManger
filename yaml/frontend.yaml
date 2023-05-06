@@ -43,6 +43,7 @@ spec:
       labels:
         app: book-manage-nginx
     spec:
+      nodeName: k8s-node2
       volumes:
         - name: config-volume
           configMap:
@@ -51,7 +52,7 @@ spec:
         - name: docker-secret
       containers:
         - name: book-manage-nginx
-          image: registry.cn-shenzhen.aliyuncs.com/csptest/bookmanger-nginx:v5.6.2
+          image: registry.cn-shenzhen.aliyuncs.com/csptest/bookmanger-nginx:v5.6.3
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
@@ -63,21 +64,21 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  namespace: gotest
   name: book-manage-nginx
 spec:
   selector:
     app: book-manage-nginx
   ports:
     - protocol: TCP
-      port: 8082
-      targetPort: 8082
+      port: 80
+      targetPort: 80
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: book-manage-nginx
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+  namespace: gotest
 spec:
   ingressClassName: nginx
   rules:
@@ -85,9 +86,9 @@ spec:
       http:
         paths:
           - path: /
-            pathType: Prefix
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: book-manage-nginx
                 port:
-                  number: 8082
+                  number: 80

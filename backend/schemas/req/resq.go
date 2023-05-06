@@ -8,7 +8,7 @@ type UserLoginReq struct {
 }
 
 func (UserLoginReq) TableName() string {
-	return "book_user"
+	return "users"
 }
 
 type UserRegister struct {
@@ -21,7 +21,7 @@ type UserRegister struct {
 }
 
 func (UserRegister) TableName() string {
-	return "book_user"
+	return "users"
 }
 
 type UserCreate struct {
@@ -33,5 +33,5 @@ type UserCreate struct {
 }
 
 func (UserCreate) TableName() string {
-	return "book_user"
+	return "users"
 }

@@ -13,3 +13,7 @@ type User struct {
 	Age      int    `json:"age" binding:"required"`
 	Phone    string `json:"phone" binding:"required,min=9,max=11"`
 }
+
+func (User) TableName() string {
+	return "users"
+}
