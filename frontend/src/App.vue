@@ -84,13 +84,7 @@
      let tableDataCopy
      let multipleSelection=$ref([])
      let dialogFormVisible=$ref(false)
-     let tableForm=$ref({
-         id:1,
-         username:'张三',
-         sex:'男',
-         age:12,
-         phone:"18824682674"
-     })
+     let tableForm=$ref({})
      let dialogType=$ref('add')
      let total=$ref(10)
      let curPage=$ref(1)
@@ -131,6 +125,7 @@
          dialogFormVisible=true
          dialogType='edit'
          tableForm={...row}
+         console.log(tableForm)
      }
      /*删除第一条*/
     let handleRowClickDel= async ({ID})=>{
@@ -185,7 +180,9 @@
 
              // tableData[index]=tableForm
              // /*11.0.1.60:8081/user/update/26*/
+             console.log(tableForm)
              await request.put(`/update/${index}`,{...tableForm})
+
              await getTableData(curPage)
          }
 

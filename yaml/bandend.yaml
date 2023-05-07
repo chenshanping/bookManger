@@ -16,14 +16,28 @@ spec:
       labels:
         app: book-manage-server
     spec:
+      volumes:
+        - name: server-config
+          configMap:
+            name: server-config
       imagePullSecrets:
         - name: docker-secret
       containers:
         - name: book-manage-server
-          image: registry.cn-shenzhen.aliyuncs.com/csptest/bookmanger-server:v5.6.3
+          image: registry.cn-shenzhen.aliyuncs.com/csptest/bookmanger-server:v5.6.4
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
+          env:
+            - name: system.env
+              value: "dev"
+          volumeMounts:
+            - mountPath: /app/config.yaml
+              name: server-config
+              subPath: config.yaml
+
+
+
       restartPolicy: Always
 ---
 apiVersion: v1

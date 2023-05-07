@@ -5,7 +5,6 @@ import (
 	"bookManage/schemas/req"
 	"bookManage/schemas/resp"
 	"bookManage/service"
-	"bookManage/util"
 	"github.com/gin-gonic/gin"
 	"strconv"
 )
@@ -62,7 +61,6 @@ func UpdateUser(c *gin.Context) {
 	if exist == false {
 		resp.FailWithMsg(c, resp.Failed, "ID不存在,无法修改")
 	} else {
-		user.Password = util.ToolsUtil.MakeMd5(user.Password)
 		service.UserService.UpdateUser(id, user)
 		resp.OkWithMsg(c, "修改成功")
 	}

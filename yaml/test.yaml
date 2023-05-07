@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: filebeat-test
+  namespace: gotest
+data:
+  filebeat.yml: |
+    processors:
+      - decode_json_fields:
+          fields: ["message"]
+          target: ""
+      - timestamp:
+          field: "requestTime"
+          timezone: Asia/Shanghai
+          layouts:
+            - '2006-01-02T15:04:05Z'
+            - '2006-01-02T15:04:05.999Z'
+            - '2006-01-02T15:04:05.999-07:00'
+          target_field: "requestTime"
+      - drop_fields:
+          fields: [
+            "agent.ephemeral_id",
+            "agent.name",
+            "agent.hostname",
+            "agent.id",
+            "agent.type",
+            "agent.version",
+            "ecs.version",
+            "host.name",
+            "input.type",
+            "ignore","log.file.path","log.offset","fields.type",
+          ]
+
+    filebeat.inputs:
+      - type: log
+        paths:
+          - "/logs/*.log"
+    #output.console:
+      #pretty: true
+    output.elasticsearch:
+      hosts: ["http://elasticsearch.efk:9200"]
+      index: book_server_test
+    setup.template.name:  test
+    setup.template.pattern: test
+    setup.template.enabled: false
+    setup.template.overwrite: true
+    setup.ilm.enabled: false
+binaryData: {}
+
+  
