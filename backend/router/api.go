@@ -8,7 +8,8 @@ import (
 func SetRouter(r *gin.Engine) {
 	r.POST("/register", controller.Register)
 	r.POST("/login", controller.Login)
-	usergroup := r.Group("/user")
+	api := r.Group("/api")
+	usergroup := api.Group("/user")
 	//usergroup.Use(middleware.AuthMiddleware())
 	{
 		// 查看所有的user
@@ -17,5 +18,10 @@ func SetRouter(r *gin.Engine) {
 		usergroup.PUT("/update/:id", controller.UpdateUser)
 		usergroup.GET("/list/:name", controller.GetUserDatail)
 		usergroup.POST("/", controller.UserCreate)
+	}
+	bookgroup := api.Group("/book")
+	{
+		bookgroup.GET("/sid", controller.GetSid)
+		bookgroup.GET("/list", controller.GetBookList)
 	}
 }

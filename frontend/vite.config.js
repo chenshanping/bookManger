@@ -10,7 +10,7 @@ export default defineConfig({
       })
   ],
   server :{
-    port: 8082,
+    port: 80,
       proxy:{
         '/user':"http://bookserver.csp.cn/"
       }

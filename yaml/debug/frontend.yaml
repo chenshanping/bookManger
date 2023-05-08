@@ -1,30 +1,3 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  namespace: gotest
-  name: nginx-config
-data:
-  nginx.conf: |
-    server {
-    listen 80;
-    server_name  localhost;
-    gzip on;
-    gzip_min_length 100;
-    gzip_types text/plain text/css application/xml application/javascript;
-    gzip_vary on;
-    location / {
-    root   /var/www/book-frontend;
-    index  index.html index.htm;
-    try_files $uri $uri/ /index.html;
-    }
-    location /user/ {
-    proxy_set_header Host $host;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header REMOTE-HOST $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_pass http://book-manage-server:8080/user/;
-    }}
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
