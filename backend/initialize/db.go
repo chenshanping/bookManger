@@ -99,7 +99,7 @@ func InitDB() {
 
 }
 func MysqlAuto() {
-	if err := global.DB.AutoMigrate(model.User{}, model.Book{}); err != nil {
+	if err := global.DB.AutoMigrate(model.User{}, model.Sort{}, model.Book{}); err != nil {
 		log.Fatalln(fmt.Sprintf("数据库创建失败:%s", err))
 	}
 }

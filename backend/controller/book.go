@@ -1,23 +1,19 @@
 package controller
 
 import (
+	"bookManage/model"
 	"bookManage/schemas/resp"
 	"bookManage/service"
 	"github.com/gin-gonic/gin"
 	"strconv"
 )
 
-func GetSid(c *gin.Context) {
-	name := c.Query("name")
-	s := service.BookService.GetBookSeries(name)
-	if s.Id == 0 {
-		resp.OkWithMsg(c, "没有查询到数据")
-		return
-	}
-	resp.OkWithMsgData(c, "查询成功", s)
+var BookApi = bookApi{}
+
+type bookApi struct {
 }
 
-func GetBookList(c *gin.Context) {
+func (ba bookApi) GetBookList(c *gin.Context) {
 	pageSize, _ := strconv.Atoi(c.Query("pageSize"))
 	pageNum, _ := strconv.Atoi(c.Query("pageNum"))
 
@@ -44,4 +40,24 @@ func GetBookList(c *gin.Context) {
 		resp.OkWithMsgData(c, "查询成功", data)
 	}
 
+}
+
+func (ba bookApi) CreateBook(c *gin.Context) {
+	var book model.Book
+	if err := c.BindJSON(&book); err != nil {
+		resp.FailWithMsg(c, resp.ParamsValidError, err.Error())
+		return
+	}
+
+	if service.BookService.GetBookID(book.Name) != 0 {
+		resp.OkWithMsg(c, "这本图书已经存在")
+	} else {
+		err := service.BookService.CreateBook(book)
+		if err != nil {
+			resp.FailWithMsg(c, resp.Failed, err.Error())
+		} else {
+			resp.OkWithMsg(c, "图书创建成功")
+		}
+
+	}
 }

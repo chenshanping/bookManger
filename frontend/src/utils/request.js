@@ -12,7 +12,7 @@ import axios from "axios";
 import {ElMessage} from "element-plus";
 // 全局配置
 const service=axios.create({
-    baseURL:"/user",
+    baseURL:"/api",
     timeout:8000 //请求超时时间
     }
 )
@@ -20,7 +20,6 @@ const service=axios.create({
 // 响应拦截
 service.interceptors.response.use(res=>{
     const {code,data,msg}=res.data
-    console.log(res.data)
     if (code===200){
         // 请求成功
         ElMessage.success(msg)

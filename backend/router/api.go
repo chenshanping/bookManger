@@ -21,7 +21,13 @@ func SetRouter(r *gin.Engine) {
 	}
 	bookgroup := api.Group("/book")
 	{
-		bookgroup.GET("/sid", controller.GetSid)
-		bookgroup.GET("/list", controller.GetBookList)
+		bookgroup.GET("/list", controller.BookApi.GetBookList)
+		bookgroup.POST("/add", controller.BookApi.CreateBook)
+
+	}
+	sortgroup := api.Group("/sort")
+	{
+		sortgroup.GET("/list", controller.SortApi.GetSortList)
+		sortgroup.GET(":id", controller.SortApi.GetSortName)
 	}
 }

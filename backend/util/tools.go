@@ -34,3 +34,17 @@ func (tu toolsUtil) MakeMd5(data string) string {
 	sum := md5.Sum([]byte(data))
 	return hex.EncodeToString(sum[:])
 }
+
+func (tu toolsUtil) Paging(pageSize int, pageNum int) int {
+	if pageSize == 0 {
+		pageSize = -1
+	}
+	if pageNum == 0 {
+		pageNum = -1
+	}
+	offSetval := (pageNum - 1) * pageSize
+	if pageNum == -1 && pageSize == -1 {
+		offSetval = -1
+	}
+	return offSetval
+}

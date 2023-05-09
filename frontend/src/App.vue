@@ -92,7 +92,7 @@
      /*方法*/
      /*请求table数据*/
      const getTableData= async (cur=1)=>{
-         let res=await request.get('/list',{
+         let res=await request.get('/user/list',{
              pageNum: cur,
              pageSize: 10,
          })
@@ -111,7 +111,7 @@
      let handleQueryName= async (val)=>{
 
          if(val.length>0){
-             tableData=await request.get(`/list/${val}`)
+             tableData=await request.get(`/user/list/${val}`)
              // tableData=tableData.filter(item=>(item.username).toLowerCase().match(val.toLowerCase()))
          } else{
              getTableData(curPage)
@@ -130,7 +130,7 @@
      /*删除第一条*/
     let handleRowClickDel= async ({ID})=>{
         console.log(ID)
-        await request.delete(`/delete/${ID}`,)
+        await request.delete(`/user/delete/${ID}`,)
         await getTableData(curPage)
 
 
@@ -167,7 +167,8 @@
          let index=tableForm.ID
          if( dialogType==='add'){
              /*将 number 类型转为 int类型*/
-             let res=await request.post("/",{...tableForm})
+             let res=await request.post("/user",{...tableForm})
+
              // tableData.push({
              //     id: (tableData.length+1).toString(),
              //     ...tableForm
@@ -176,13 +177,7 @@
              await getTableData(curPage)
          }else{
              /*获取当前这条索引*/
-             // let index=tableData.findIndex(item=>item.id===tableForm.id)
-
-             // tableData[index]=tableForm
-             // /*11.0.1.60:8081/user/update/26*/
-             console.log(tableForm)
-             await request.put(`/update/${index}`,{...tableForm})
-
+             await request.put(`/user/update/${index}`,{...tableForm})
              await getTableData(curPage)
          }
 

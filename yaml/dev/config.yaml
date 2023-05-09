@@ -1,0 +1,78 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: server-config
+  namespace: gotest
+data:
+  config.yaml: |
+    mysql:
+      host: "11.0.1.70"
+      user: "root"
+      password: "123456"
+      port: 3306
+      dbname: "bookManger"
+      charset: "utf8mb4"
+      parseTime: True
+      loc: "Local"
+      slowSql: 50ms # 慢sql时间。单位毫秒
+      logLevel: info # error、info、warn
+      ignoreRecordNotFoundError: true # 是否忽略ErrRecordNotFound(未查到记录错误)
+      gorm:
+        skipDefaultTx: true # 是否跳过默认事务
+        tablePrefix: "book_" #表前缀
+        singularTable: true # 是否使用单数表名(默认复数)，启用后，User结构体表将是user
+        coverLogger: true # 是否覆盖默认logger
+        prepareStmt: false # 执行任何SQL时都会创建一个prepared statement并将其缓存，以提高后续的效率
+        disableForeignKeyConstraintWhenMigrating: true #在AutoMigrate 或 CreateTable 时，GORM 会自动创建外键约束，若要禁用该特性，可将其设置为 true
+    redis:
+      host: "11.0.1.70"
+      port: 6379
+      password: "4ZQok8ws"
+      db: 1
+      prefix: "book_"
+      dialTimeout: 5s #redis连接超时时间.默认5s
+    system:
+      host: ""
+      port: "8080"
+      env: "debug"
+    log:
+      path: ./logs # 日志文件目录
+      filePrefix: gin # 日志文件前缀
+      fileFormat: "2006-01-02" # 日志文件名格式
+      level: info # 最低记录级别
+      writeWay: file # file/console/all
+      outFormat: json # json/console
+      zap:
+        outFormat: json # json/
+      lumberJack: # 日志文件切割和压缩
+        maxSize: 1 # 单文件最大容量(单位MB)
+        maxBackups: 3 # 保留旧文件的最大数量
+        maxAge: 30 # 旧文件最多保存几天
+        compress: false #是否压缩/归档旧文件
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: gotest
+  name: nginx-config
+data:
+  nginx.conf: |
+    server {
+    listen 80;
+    server_name  localhost;
+    gzip on;
+    gzip_min_length 100;
+    gzip_types text/plain text/css application/xml application/javascript;
+    gzip_vary on;
+    location / {
+    root   /var/www/book-frontend;
+    index  index.html index.htm;
+    try_files $uri $uri/ /index.html;
+    }
+    location /user/ {
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header REMOTE-HOST $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_pass http://book-manage-server-dev:8080/user/;
+    }}
